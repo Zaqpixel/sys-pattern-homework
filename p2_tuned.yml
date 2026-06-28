@@ -1,0 +1,16 @@
+---
+- name: Install and enable tuned
+  hosts: localhost
+  become: yes
+  tasks:
+    - name: Install tuned package
+      ansible.builtin.apt:
+        name: tuned
+        state: present
+        update_cache: yes
+
+    - name: Ensure tuned service is started and enabled
+      ansible.builtin.systemd:
+        name: tuned
+        state: started
+        enabled: yes
