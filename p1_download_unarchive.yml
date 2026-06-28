@@ -1,0 +1,25 @@
+---
+- name: Download and extract stress archive
+  hosts: localhost
+  gather_facts: no
+  vars:
+    archive_url: "http://archive.ubuntu.com/ubuntu/pool/universe/s/stress/stress_1.0.4.orig.tar.gz"
+    dest_dir: "/tmp/stress"
+  tasks:
+    - name: Create destination directory
+      ansible.builtin.file:
+        path: "{{ dest_dir }}"
+        state: directory
+
+    - name: Download archive
+      ansible.builtin.get_url:
+        url: "{{ archive_url }}"
+        dest: "/tmp/stress.tar.gz"
+        mode: '0644'
+
+    - name: Extract archive
+      ansible.builtin.unarchive:
+        src: "/tmp/stress.tar.gz"
+        dest: "{{ dest_dir }}"
+        remote_src: yes
+        creates: "{{ dest_dir }}/src"
