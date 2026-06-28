@@ -1,0 +1,14 @@
+---
+- name: Change motd with a variable
+  hosts: localhost
+  become: yes
+  vars:
+    welcome_message: "Welcome to Netology DevOps lab!"
+  tasks:
+    - name: Update /etc/motd
+      ansible.builtin.copy:
+        content: "{{ welcome_message }}\n"
+        dest: /etc/motd
+        owner: root
+        group: root
+        mode: '0644'
