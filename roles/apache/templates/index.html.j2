@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+<head><title>System Info</title></head>
+<body>
+<h1>Managed by Ansible</h1>
+<ul>
+  <li><strong>Hostname:</strong> {{ ansible_hostname }}</li>
+  <li><strong>CPU:</strong> {{ ansible_processor[2] | default(ansible_processor[0]) }}</li>
+  <li><strong>RAM:</strong> {{ ansible_memtotal_mb }} MB</li>
+  <li><strong>First HDD size:</strong> {{ ansible_devices[ansible_device_links.master | default('sda')].size | default('unknown') }}</li>
+  <li><strong>IP Address:</strong> {{ ansible_default_ipv4.address }}</li>
+</ul>
+</body>
+</html>

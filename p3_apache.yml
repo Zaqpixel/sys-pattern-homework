@@ -1,0 +1,6 @@
+---
+- name: Deploy Apache with custom page
+  hosts: localhost
+  become: yes
+  roles:
+    - apache
